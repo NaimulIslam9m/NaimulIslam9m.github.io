@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HawkEye Writeup - CyberDefenders | Awesome Hugo blog</title>
+<meta property="og:title" content="HawkEye Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="twitter:title" content="HawkEye Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta itemprop="name" content="HawkEye Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="application-name" content="HawkEye Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta property="og:site_name" content="Awesome hugo blog" />
+
+<meta name="description" content="An accountant at your organization received an email regarding an invoice with a download link. Suspicious network traffic was observed shortly after opening the email. As a SOC analyst, investigate the network trace and analyze exfiltration attempts.">
+<meta itemprop="description" content="An accountant at your organization received an email regarding an invoice with a download link. Suspicious network traffic was observed shortly after opening the email. As a SOC analyst, investigate the network trace and analyze exfiltration attempts." />
+<meta property="og:description" content="An accountant at your organization received an email regarding an invoice with a download link. Suspicious network traffic was observed shortly after opening the email. As a SOC analyst, investigate the network trace and analyze exfiltration attempts." />
+<meta name="twitter:description" content="An accountant at your organization received an email regarding an invoice with a download link. Suspicious network traffic was observed shortly after opening the email. As a SOC analyst, investigate the network trace and analyze exfiltration attempts." />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="https://hba.sid.one/" />
+  <meta property="og:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image:src" content="https://hba.sid.one/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-08-06T00:00:00Z />
+    <meta property="article:published_time" content=2023-08-06T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Naimul islam" />
+    <meta property="article:author" content="Naimul islam" />
+    <meta name="author" content="Naimul islam" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HawkEye Writeup - CyberDefenders",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-08-06",
+        "description": "An accountant at your organization received an email regarding an invoice with a download link. Suspicious network traffic was observed shortly after opening the email. As a SOC analyst, investigate the network trace and analyze exfiltration attempts.",
+        "wordCount":  680 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-08-06",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Awesome Hugo blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="https://hba.sid.one/posts/hawkeye-writeup-cyberdefenders/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://hba.sid.one/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <b style="font-size: 20px;">
+            <a href="https://hba.sid.one/" class="title">
+                Malxplorer
+                
+            </a>
+        </b>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HawkEye Writeup - CyberDefenders</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-08-06T00:00:00&#43;00:00" itemprop="datePublished"> 6 Aug 2023 </time>
+                </div>
+                
+            </header>
+            <details class="toc">
+                <summary><b>Table of Contents</b></summary>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-how-many-packets-does-the-capture-have">1. How many packets does the capture have?</a></li>
+    <li><a href="#2-at-what-time-was-the-first-packet-captured">2. At what time was the first packet captured?</a></li>
+    <li><a href="#3-what-is-the-duration-of-the-capture">3. What is the duration of the capture?</a></li>
+    <li><a href="#4-what-is-the-most-active-computer-at-the-link-level">4. What is the most active computer at the link level?</a></li>
+    <li><a href="#5-manufacturer-of-the-nic-of-the-most-active-system-at-the-link-level">5. Manufacturer of the NIC of the most active system at the link level?</a></li>
+    <li><a href="#6-where-is-the-headquarter-of-the-company-that-manufactured-the-nic-of-the-most-active-computer-at-the-link-level">6. Where is the headquarter of the company that manufactured the NIC of the most active computer at the link level?</a></li>
+    <li><a href="#7-the-organization-works-with-private-addressing-and-netmask-24-how-many-computers-in-the-organization-are-involved-in-the-capture">7. The organization works with private addressing and netmask /24. How many computers in the organization are involved in the capture?</a></li>
+    <li><a href="#8-what-is-the-name-of-the-most-active-computer-at-the-network-level">8. What is the name of the most active computer at the network level?</a></li>
+    <li><a href="#9-what-is-the-ip-of-the-organizations-dns-server">9. What is the IP of the organization&rsquo;s DNS server?</a></li>
+    <li><a href="#10-what-domain-is-the-victim-asking-about-in-packet-204">10. What domain is the victim asking about in packet 204?</a></li>
+    <li><a href="#11-what-is-the-ip-of-the-domain-in-the-previous-question">11. What is the IP of the domain in the previous question?</a></li>
+    <li><a href="#12-indicate-the-country-to-which-the-ip-in-the-previous-section-belongs">12. Indicate the country to which the IP in the previous section belongs.</a></li>
+    <li><a href="#13-what-operating-system-does-the-victims-computer-run">13. What operating system does the victim&rsquo;s computer run?</a></li>
+    <li><a href="#14-what-is-the-name-of-the-malicious-file-downloaded-by-the-accountant">14. What is the name of the malicious file downloaded by the accountant?</a></li>
+    <li><a href="#15-what-is-the-md5-hash-of-the-downloaded-file">15. What is the md5 hash of the downloaded file?</a></li>
+    <li><a href="#16-what-is-the-name-of-the-malware-according-to-malwarebytes">16. What is the name of the malware according to Malwarebytes?</a></li>
+    <li><a href="#17-what-software-runs-the-webserver-that-hosts-the-malware">17. What software runs the webserver that hosts the malware?</a></li>
+    <li><a href="#18-what-is-the-public-ip-of-the-victims-computer">18. What is the public IP of the victim&rsquo;s computer?</a></li>
+    <li><a href="#19-in-which-country-is-the-email-server-to-which-the-stolen-information-is-sent">19. In which country is the email server to which the stolen information is sent?</a></li>
+    <li><a href="#20-analyzing-the-first-extraction-of-information-what-software-runs-the-email-server-to-which-the-stolen-data-is-sent">20. Analyzing the first extraction of information. What software runs the email server to which the stolen data is sent?</a></li>
+    <li><a href="#21-to-which-email-account-is-the-stolen-information-sent">21. To which email account is the stolen information sent?</a></li>
+    <li><a href="#22-what-is-the-password-used-by-the-malware-to-send-the-email">22. What is the password used by the malware to send the email?</a></li>
+    <li><a href="#23-which-malware-variant-exfiltrated-the-data">23. Which malware variant exfiltrated the data?</a></li>
+    <li><a href="#24-what-are-the-bankofamerica-access-credentials-usernamepassword">24. What are the bankofamerica access credentials? (username:password)</a></li>
+    <li><a href="#25-every-how-many-minutes-does-the-collected-data-get-exfiltrated">25. Every how many minutes does the collected data get exfiltrated?</a></li>
+  </ul>
+</nav>
+            </details><div class="page-content">
+                <p><img src="https://cyberdefenders.org/media/terraform/HawkEye/HawkEye.jpg" alt=""></p>
+<blockquote>
+<p>An accountant at your organization received an email regarding an invoice with a download link. Suspicious network traffic was observed shortly after opening the email. As a SOC analyst, investigate the network trace and analyze exfiltration attempts.</p>
+</blockquote>
+<h2 id="1-how-many-packets-does-the-capture-have">1. How many packets does the capture have?</h2>
+<pre tabindex="0"><code>tshark -r stealer.pcap | wc -l
+4003
+</code></pre><h2 id="2-at-what-time-was-the-first-packet-captured">2. At what time was the first packet captured?</h2>
+<p>Go to statistics &gt; capture file properties. First packet capture time 2019-04-10 02:37:07 UTC.</p>
+<h2 id="3-what-is-the-duration-of-the-capture">3. What is the duration of the capture?</h2>
+<p>Go to statistics &gt; capture file properties. Elapse time 01:03:41.</p>
+<h2 id="4-what-is-the-most-active-computer-at-the-link-level">4. What is the most active computer at the link level?</h2>
+<p>Go to statistice &gt; endpoint in wireshark. Go to Ethernet tab. Sort the packets column in descending order. First MAC addres is the answer.</p>
+<p>00:08:02:1c:47:ae</p>
+<h2 id="5-manufacturer-of-the-nic-of-the-most-active-system-at-the-link-level">5. Manufacturer of the NIC of the most active system at the link level?</h2>
+<p>Searching first 3 byte of MAC address in google we found the manufacturer is Hewlett Packard.</p>
+<h2 id="6-where-is-the-headquarter-of-the-company-that-manufactured-the-nic-of-the-most-active-computer-at-the-link-level">6. Where is the headquarter of the company that manufactured the NIC of the most active computer at the link level?</h2>
+<p>Googling Hewlett Packard headquarter we got the name is Palo Alto.</p>
+<h2 id="7-the-organization-works-with-private-addressing-and-netmask-24-how-many-computers-in-the-organization-are-involved-in-the-capture">7. The organization works with private addressing and netmask /24. How many computers in the organization are involved in the capture?</h2>
+<p><img src="https://i.imgur.com/ekbPi9U.png" alt=""></p>
+<p>10.4.10.0/24 is local network. Here 10.4.10.255 is broadcast IP. So, there are 3 computers.</p>
+<h2 id="8-what-is-the-name-of-the-most-active-computer-at-the-network-level">8. What is the name of the most active computer at the network level?</h2>
+<p><img src="https://imgur.com/nZQ16r0.png" alt=""></p>
+<p>We can see most active computer at network level is 10.4.10.132. So, using <code>ip.addr==10.4.10.132 &amp;&amp; frame contains -pc</code> display filter we get 5 packets. Following the tcp stream we get name.</p>
+<p>BEIJING-5CD1-PC</p>
+<h2 id="9-what-is-the-ip-of-the-organizations-dns-server">9. What is the IP of the organization&rsquo;s DNS server?</h2>
+<p>Using <code>dns.flags == 0x0100</code> display filter we see DNS query request is going to <code>10.4.10.4</code> IP.</p>
+<h2 id="10-what-domain-is-the-victim-asking-about-in-packet-204">10. What domain is the victim asking about in packet 204?</h2>
+<p>proforma-invoices.com</p>
+<h2 id="11-what-is-the-ip-of-the-domain-in-the-previous-question">11. What is the IP of the domain in the previous question?</h2>
+<p>217.182.138.150</p>
+<h2 id="12-indicate-the-country-to-which-the-ip-in-the-previous-section-belongs">12. Indicate the country to which the IP in the previous section belongs.</h2>
+<p>France (used <a href="https://whatismyipaddress.com/">https://whatismyipaddress.com/</a>)</p>
+<h2 id="13-what-operating-system-does-the-victims-computer-run">13. What operating system does the victim&rsquo;s computer run?</h2>
+<p>Filter display packet <code>http</code> and follow the first packet. There you will get the operating system in user-agent.
+Windows NT 6.1</p>
+<h2 id="14-what-is-the-name-of-the-malicious-file-downloaded-by-the-accountant">14. What is the name of the malicious file downloaded by the accountant?</h2>
+<p>Going to &lsquo;Statistics &gt; IPv4 Statistics &gt; All Addresses&rsquo; we can see most of the communication is done between two addresses. So we can assume one is accountant (victim) and another is malicious server.</p>
+<p><img src="https://i.imgur.com/8RTzLN8.png" alt=""></p>
+<p>Applying <code>ip.addr==217.182.138.150</code> display filter we find the following file is downloaded. The file size is quite large and is downloaded by segmented.</p>
+<p>tkraw_Protected99.exe</p>
+<h2 id="15-what-is-the-md5-hash-of-the-downloaded-file">15. What is the md5 hash of the downloaded file?</h2>
+<p>Going to &lsquo;File &gt; Export Objects &gt; HTTP&rsquo; we can export the file. Then applying md5sum we get,
+71826ba081e303866ce2a2534491a2f7</p>
+<h2 id="16-what-is-the-name-of-the-malware-according-to-malwarebytes">16. What is the name of the malware according to Malwarebytes?</h2>
+<p>Google for &lsquo;Spyware.HawkEyeKeylogger&rsquo;</p>
+<h2 id="17-what-software-runs-the-webserver-that-hosts-the-malware">17. What software runs the webserver that hosts the malware?</h2>
+<p>Following 210 number packet.
+<img src="https://i.imgur.com/18kHMOT.png" alt=""></p>
+<h2 id="18-what-is-the-public-ip-of-the-victims-computer">18. What is the public IP of the victim&rsquo;s computer?</h2>
+<p>From stream 16</p>
+<pre tabindex="0"><code>250-p3plcpnl0413.prod.phx3.secureserver.net Hello Beijing-5cd1-PC [173.66.146.112]
+</code></pre><h2 id="19-in-which-country-is-the-email-server-to-which-the-stolen-information-is-sent">19. In which country is the email server to which the stolen information is sent?</h2>
+<p>Applying <code>smpt</code> display filter we get <code>23.229.162.69</code> mail server IP.
+United States</p>
+<h2 id="20-analyzing-the-first-extraction-of-information-what-software-runs-the-email-server-to-which-the-stolen-data-is-sent">20. Analyzing the first extraction of information. What software runs the email server to which the stolen data is sent?</h2>
+<p>From stream 16
+Exim 4.91</p>
+<h2 id="21-to-which-email-account-is-the-stolen-information-sent">21. To which email account is the stolen information sent?</h2>
+<p>From stream 16</p>
+<pre tabindex="0"><code>echo &#34;c2FsZXMuZGVsQG1hY3dpbmxvZ2lzdGljcy5pbg==&#34; | base64 -d
+sales.del@macwinlogistics.in
+</code></pre><h2 id="22-what-is-the-password-used-by-the-malware-to-send-the-email">22. What is the password used by the malware to send the email?</h2>
+<p>From stream 16</p>
+<pre tabindex="0"><code>echo &#34;U2FsZXNAMjM=&#34; | base64 -d
+Sales@23
+</code></pre><h2 id="23-which-malware-variant-exfiltrated-the-data">23. Which malware variant exfiltrated the data?</h2>
+<p>From stream 16</p>
+<pre tabindex="0"><code>echo &#34;SGF3a0V5ZSBLZXlsb2dnZXIgLSBSZWJvcm4gdjkgLSBQYXNzd29yZHMgTG9ncyAtIHJvbWFuLm1jZ3VpcmUgXCBCRUlKSU5HLTVDRDEtUEMgLSAxNzMuNjYuMTQ2LjExMg==&#34; | base64 -d
+HawkEye Keylogger - Reborn v9 - Passwords Logs - roman.mcguire \ BEIJING-5CD1-PC - 173.66.146.112
+</code></pre><p>Reborn v9</p>
+<h2 id="24-what-are-the-bankofamerica-access-credentials-usernamepassword">24. What are the bankofamerica access credentials? (username:password)</h2>
+<p>After decoding stream 16 base64 encoded mail.
+roman.mcguire:P@ssw0rd$</p>
+<h2 id="25-every-how-many-minutes-does-the-collected-data-get-exfiltrated">25. Every how many minutes does the collected data get exfiltrated?</h2>
+<p>After checking mail sending time of stream 16 &amp; 21 found the interval is 10 minutes.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <small class="footer_copyright">
+        © 2023 Naimul Islam.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="https://hba.sid.one/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

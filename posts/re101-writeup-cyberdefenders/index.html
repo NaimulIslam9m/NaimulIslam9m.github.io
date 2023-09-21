@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">RE101 Writeup - CyberDefenders | Awesome Hugo blog</title>
+<meta property="og:title" content="RE101 Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="twitter:title" content="RE101 Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta itemprop="name" content="RE101 Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="application-name" content="RE101 Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta property="og:site_name" content="Awesome hugo blog" />
+
+<meta name="description" content="RE101 challenge is a binary analysis exercise - a task security blue team analysts do to understand how a specific malware works and extract possible intel.">
+<meta itemprop="description" content="RE101 challenge is a binary analysis exercise - a task security blue team analysts do to understand how a specific malware works and extract possible intel." />
+<meta property="og:description" content="RE101 challenge is a binary analysis exercise - a task security blue team analysts do to understand how a specific malware works and extract possible intel." />
+<meta name="twitter:description" content="RE101 challenge is a binary analysis exercise - a task security blue team analysts do to understand how a specific malware works and extract possible intel." />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="https://hba.sid.one/" />
+  <meta property="og:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image:src" content="https://hba.sid.one/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-07-30T00:00:00Z />
+    <meta property="article:published_time" content=2023-07-30T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Naimul islam" />
+    <meta property="article:author" content="Naimul islam" />
+    <meta name="author" content="Naimul islam" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "RE101 Writeup - CyberDefenders",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-07-30",
+        "description": "RE101 challenge is a binary analysis exercise - a task security blue team analysts do to understand how a specific malware works and extract possible intel.",
+        "wordCount":  268 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-07-30",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Awesome Hugo blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="https://hba.sid.one/posts/re101-writeup-cyberdefenders/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://hba.sid.one/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <b style="font-size: 20px;">
+            <a href="https://hba.sid.one/" class="title">
+                Malxplorer
+                
+            </a>
+        </b>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">RE101 Writeup - CyberDefenders</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-07-30T00:00:00&#43;00:00" itemprop="datePublished"> 30 Jul 2023 </time>
+                </div>
+                
+            </header>
+            <details class="toc">
+                <summary><b>Table of Contents</b></summary>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ive-used-this-new-encryption-i-heard-about-online-for-my-warez-i-bet-you-cant-extract-the-flag-file-malware000">I&rsquo;ve used this new encryption I heard about online for my warez; I bet you can&rsquo;t extract the flag! (File: MALWARE000)</a></li>
+    <li><a href="#check-out-what-i-can-do-file-just-some-js">Check out what I can do! (File: Just some JS)</a></li>
+    <li><a href="#im-tired-of-javascript-luckily-i-found-the-grand-daddy-of-that-lame-last-language-file-this-is-not-js">I&rsquo;m tired of Javascript. Luckily, I found the grand-daddy of that lame last language! (File: This is not JS)</a></li>
+    <li><a href="#i-zipped-flagtxt-and-encrypted-it-with-the-password-password-but-i-think-the-header-got-messed-up-you-can-have-the-flag-if-you-fix-the-file-file-unzip-me">I zipped flag.txt and encrypted it with the password &ldquo;password&rdquo;, but I think the header got messed up&hellip; You can have the flag if you fix the file (File: Unzip Me)</a></li>
+    <li><a href="#apparently-my-encryption-isnt-so-secure-ive-got-a-new-way-of-hiding-my-flags-file-malware101">Apparently, my encryption isn&rsquo;t so secure. I&rsquo;ve got a new way of hiding my flags! (File: MALWARE101)</a></li>
+    <li><a href="#ugh-i-guess-ill-just-roll-my-own-encryption-im-not-too-good-at-math-but-it-looks-good-to-me-file-malware201">Ugh&hellip; I guess I&rsquo;ll just roll my own encryption. I&rsquo;m not too good at math, but it looks good to me! (File: MALWARE201)</a></li>
+  </ul>
+</nav>
+            </details><div class="page-content">
+                <p><img src="https://cyberdefenders.org/media/terraform/RE101/RE101.jpg" alt=""></p>
+<blockquote>
+<p>RE101 challenge is a binary analysis exercise - a task security blue team analysts do to understand how a specific malware works and extract possible intel.</p>
+</blockquote>
+<h2 id="ive-used-this-new-encryption-i-heard-about-online-for-my-warez-i-bet-you-cant-extract-the-flag-file-malware000">I&rsquo;ve used this new encryption I heard about online for my warez; I bet you can&rsquo;t extract the flag! (File: MALWARE000)</h2>
+<p>die &gt; strings
+ZmxhZzwwb3BzX2lfdXNlZF8xMzM3X2I2NF9lbmNyeXB0aW9uPgo=
+base64 -d</p>
+<p><strong>Flag</strong>: 0ops_i_used_1337_b64_encryption</p>
+<h2 id="check-out-what-i-can-do-file-just-some-js">Check out what I can do! (File: Just some JS)</h2>
+<p><img src="https://i.imgur.com/IX7Cayz.png" alt=""></p>
+<p>Obfuscated javascript.
+node just_some_js</p>
+<p><strong>Flag</strong>: what_a_cheeky_language!1!</p>
+<h2 id="im-tired-of-javascript-luckily-i-found-the-grand-daddy-of-that-lame-last-language-file-this-is-not-js">I&rsquo;m tired of Javascript. Luckily, I found the grand-daddy of that lame last language! (File: This is not JS)</h2>
+<p><img src="https://i.imgur.com/5UGxKzM.png" alt="">
+BrainFuck!
+<a href="https://www.dcode.fr/brainfuck-language">https://www.dcode.fr/brainfuck-language</a></p>
+<p><strong>Flag</strong>: Now_THIS_is_programming</p>
+<h2 id="i-zipped-flagtxt-and-encrypted-it-with-the-password-password-but-i-think-the-header-got-messed-up-you-can-have-the-flag-if-you-fix-the-file-file-unzip-me">I zipped flag.txt and encrypted it with the password &ldquo;password&rdquo;, but I think the header got messed up&hellip; You can have the flag if you fix the file (File: Unzip Me)</h2>
+<p>Used this <a href="https://users.cs.jmu.edu/buchhofp/forensics/formats/pkzip.html">PKZip specification doc</a>.
+Just needed to fix file name length.</p>
+<p><img src="https://imgur.com/P9M5evA.png" alt="">
+<strong>Flag</strong>: R3ad_th3_spec</p>
+<h2 id="apparently-my-encryption-isnt-so-secure-ive-got-a-new-way-of-hiding-my-flags-file-malware101">Apparently, my encryption isn&rsquo;t so secure. I&rsquo;ve got a new way of hiding my flags! (File: MALWARE101)</h2>
+<p>THIS CHALLENGE IS REALLY TRICKY!
+The scrambled characters injected into stack memory in order.
+So, by using GDB, adding breakpoint before printf, you will get the flag in stack.</p>
+<p><img src="https://imgur.com/rqqnrKK.png" alt="">
+<strong>Flag</strong>: sTaCk_strings_LMAO</p>
+<h2 id="ugh-i-guess-ill-just-roll-my-own-encryption-im-not-too-good-at-math-but-it-looks-good-to-me-file-malware201">Ugh&hellip; I guess I&rsquo;ll just roll my own encryption. I&rsquo;m not too good at math, but it looks good to me! (File: MALWARE201)</h2>
+<pre tabindex="0"><code>x = [0x6d, 0x78, 0x61, 0x6c, 0xdd, 0x7e, 0x65, 0x7e, 0x47, 0x6a, 0x4f, 0xcc, 0xf7, 0xca, 0x73, 0x68, 0x55, 0x42, 0x53, 0xdc, 0xd7, 0xd4, 0x6b, 0xec, 0xdb, 0xd2, 0xe1, 0x1c, 0x6d, 0xde, 0xd1, 0xc2]
+
+for i, num in enumerate(x):
+    a = i | 0xa0
+    b = num ^ a
+    c = b &gt;&gt; 1
+    print(chr(c), end=&#39;&#39;)
+</code></pre><p><strong>Flag</strong>: malwar3-3ncryp710n-15-Sh17</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <small class="footer_copyright">
+        © 2023 Naimul Islam.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="https://hba.sid.one/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

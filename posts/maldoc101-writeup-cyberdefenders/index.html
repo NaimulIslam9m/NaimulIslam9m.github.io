@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">MalDoc101 Writeup - CyberDefenders | Awesome Hugo blog</title>
+<meta property="og:title" content="MalDoc101 Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="twitter:title" content="MalDoc101 Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta itemprop="name" content="MalDoc101 Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="application-name" content="MalDoc101 Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta property="og:site_name" content="Awesome hugo blog" />
+
+<meta name="description" content="It is common for threat actors to utilize living off the land (LOTL) techniques, such as the execution of PowerShell to further their attacks and transition from macro code. This challenge is intended to show how you can often times perform quick analysis to extract important IOCs. The focus of this exercise is on static techniques for analysis.">
+<meta itemprop="description" content="It is common for threat actors to utilize living off the land (LOTL) techniques, such as the execution of PowerShell to further their attacks and transition from macro code. This challenge is intended to show how you can often times perform quick analysis to extract important IOCs. The focus of this exercise is on static techniques for analysis." />
+<meta property="og:description" content="It is common for threat actors to utilize living off the land (LOTL) techniques, such as the execution of PowerShell to further their attacks and transition from macro code. This challenge is intended to show how you can often times perform quick analysis to extract important IOCs. The focus of this exercise is on static techniques for analysis." />
+<meta name="twitter:description" content="It is common for threat actors to utilize living off the land (LOTL) techniques, such as the execution of PowerShell to further their attacks and transition from macro code. This challenge is intended to show how you can often times perform quick analysis to extract important IOCs. The focus of this exercise is on static techniques for analysis." />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="https://hba.sid.one/" />
+  <meta property="og:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image:src" content="https://hba.sid.one/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-08-02T00:00:00Z />
+    <meta property="article:published_time" content=2023-08-02T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Naimul islam" />
+    <meta property="article:author" content="Naimul islam" />
+    <meta name="author" content="Naimul islam" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "MalDoc101 Writeup - CyberDefenders",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-08-02",
+        "description": "It is common for threat actors to utilize living off the land (LOTL) techniques, such as the execution of PowerShell to further their attacks and transition from macro code. This challenge is intended to show how you can often times perform quick analysis to extract important IOCs. The focus of this exercise is on static techniques for analysis.",
+        "wordCount":  283 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-08-02",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Awesome Hugo blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="https://hba.sid.one/posts/maldoc101-writeup-cyberdefenders/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://hba.sid.one/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <b style="font-size: 20px;">
+            <a href="https://hba.sid.one/" class="title">
+                Malxplorer
+                
+            </a>
+        </b>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">MalDoc101 Writeup - CyberDefenders</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-08-02T00:00:00&#43;00:00" itemprop="datePublished"> 2 Aug 2023 </time>
+                </div>
+                
+            </header>
+            <details class="toc">
+                <summary><b>Table of Contents</b></summary>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-multiple-streams-contain-macros-in-this-document-provide-the-number-of-highest-one">1. Multiple streams contain macros in this document. Provide the number of highest one.</a></li>
+    <li><a href="#2-what-event-is-used-to-begin-the-execution-of-the-macros">2. What event is used to begin the execution of the macros?</a></li>
+    <li><a href="#3-what-malware-family-was-this-maldoc-attempting-to-drop">3. What malware family was this maldoc attempting to drop?</a></li>
+    <li><a href="#4-what-stream-is-responsible-for-the-storage-of-the-base64-encoded-string">4. What stream is responsible for the storage of the base64-encoded string?</a></li>
+    <li><a href="#5-this-document-contains-a-user-form-provide-the-name">5. This document contains a user-form. Provide the name?</a></li>
+    <li><a href="#6-this-document-contains-an-obfuscated-base64-encoded-string-what-value-is-used-to-pad-or-obfuscate-this-string">6. This document contains an obfuscated base64 encoded string; what value is used to pad (or obfuscate) this string?</a></li>
+    <li><a href="#7-what-is-the-program-executed-by-the-base64-encoded-string">7. What is the program executed by the base64 encoded string?</a></li>
+    <li><a href="#8-what-wmi-class-is-used-to-create-the-process-to-launch-the-trojan">8. What WMI class is used to create the process to launch the trojan?</a></li>
+    <li><a href="#9-multiple-domains-were-contacted-to-download-a-trojan-provide-first-fqdn-as-per-the-provided-hint">9. Multiple domains were contacted to download a trojan. Provide first FQDN as per the provided hint.</a></li>
+  </ul>
+</nav>
+            </details><div class="page-content">
+                <p><img src="https://cyberdefenders.org/media/terraform/MalDoc101/MalDoc101.jpg" alt=""></p>
+<blockquote>
+<p>It is common for threat actors to utilize living off the land (LOTL) techniques, such as the execution of PowerShell to further their attacks and transition from macro code. This challenge is intended to show how you can often times perform quick analysis to extract important IOCs. The focus of this exercise is on static techniques for analysis.</p>
+</blockquote>
+<h2 id="1-multiple-streams-contain-macros-in-this-document-provide-the-number-of-highest-one">1. Multiple streams contain macros in this document. Provide the number of highest one.</h2>
+<pre tabindex="0"><code>oledump.py sample.bin
+</code></pre><p><img src="https://i.imgur.com/zsuzYIi.png" alt=""></p>
+<h2 id="2-what-event-is-used-to-begin-the-execution-of-the-macros">2. What event is used to begin the execution of the macros?</h2>
+<pre tabindex="0"><code>olevba sample.bin
+</code></pre><p><img src="https://i.imgur.com/1R92dS4.png" alt=""></p>
+<h2 id="3-what-malware-family-was-this-maldoc-attempting-to-drop">3. What malware family was this maldoc attempting to drop?</h2>
+<p>Drop the sample into Virustotal. It shows <code>trojan.w97m/emotet</code>.</p>
+<h2 id="4-what-stream-is-responsible-for-the-storage-of-the-base64-encoded-string">4. What stream is responsible for the storage of the base64-encoded string?</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">for</span> i in <span class="o">{</span>17..36<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">echo</span> <span class="s2">&#34;stream </span><span class="nv">$i</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">   oledump.py sample.bin -s <span class="nv">$i</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><p>Using the above script, I printed all the streams and found 34 number stream has base64 string.</p>
+<h2 id="5-this-document-contains-a-user-form-provide-the-name">5. This document contains a user-form. Provide the name?</h2>
+<p>roubhaol</p>
+<h2 id="6-this-document-contains-an-obfuscated-base64-encoded-string-what-value-is-used-to-pad-or-obfuscate-this-string">6. This document contains an obfuscated base64 encoded string; what value is used to pad (or obfuscate) this string?</h2>
+<p>Dumped the stream in a file.</p>
+<pre tabindex="0"><code>oledump.py sample.bin -s 34 | cut -d &#39; &#39; -f 20 &gt; dump.txt
+</code></pre><p>Then found <code>2342772g3&amp;*gs7712ffvs626fq</code> string as repetitive.</p>
+<h2 id="7-what-is-the-program-executed-by-the-base64-encoded-string">7. What is the program executed by the base64 encoded string?</h2>
+<p>Removing the pad we get base64 string. Using cyberchef we get decoded Powershell command.</p>
+<blockquote>
+<p><strong>Recipe</strong>: From Base64 &gt; Remove null bytes</p>
+</blockquote>
+<h2 id="8-what-wmi-class-is-used-to-create-the-process-to-launch-the-trojan">8. What WMI class is used to create the process to launch the trojan?</h2>
+<p><img src="https://imgur.com/YlBNwJO.png" alt=""></p>
+<h2 id="9-multiple-domains-were-contacted-to-download-a-trojan-provide-first-fqdn-as-per-the-provided-hint">9. Multiple domains were contacted to download a trojan. Provide first FQDN as per the provided hint.</h2>
+<p>After executing the URL part of powershell script we get the some urls. First one is the answer.</p>
+<p><img src="https://imgur.com/wynbFtH.png" alt=""></p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <small class="footer_copyright">
+        © 2023 Naimul Islam.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="https://hba.sid.one/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

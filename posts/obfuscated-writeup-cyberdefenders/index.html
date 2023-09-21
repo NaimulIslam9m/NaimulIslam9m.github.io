@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Obfuscated Writeup - CyberDefenders | Awesome Hugo blog</title>
+<meta property="og:title" content="Obfuscated Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="twitter:title" content="Obfuscated Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta itemprop="name" content="Obfuscated Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta name="application-name" content="Obfuscated Writeup - CyberDefenders | Awesome Hugo blog" />
+<meta property="og:site_name" content="Awesome hugo blog" />
+
+<meta name="description" content="During your shift as a SOC analyst, the enterprise EDR alerted a suspicious behavior from an end-user machine. The user indicated that he received a recent email with a DOC file from an unknown sender and passed the document for you to analyze.">
+<meta itemprop="description" content="During your shift as a SOC analyst, the enterprise EDR alerted a suspicious behavior from an end-user machine. The user indicated that he received a recent email with a DOC file from an unknown sender and passed the document for you to analyze." />
+<meta property="og:description" content="During your shift as a SOC analyst, the enterprise EDR alerted a suspicious behavior from an end-user machine. The user indicated that he received a recent email with a DOC file from an unknown sender and passed the document for you to analyze." />
+<meta name="twitter:description" content="During your shift as a SOC analyst, the enterprise EDR alerted a suspicious behavior from an end-user machine. The user indicated that he received a recent email with a DOC file from an unknown sender and passed the document for you to analyze." />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="https://hba.sid.one/" />
+  <meta property="og:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image:src" content="https://hba.sid.one/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-08-01T00:00:00Z />
+    <meta property="article:published_time" content=2023-08-01T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Naimul islam" />
+    <meta property="article:author" content="Naimul islam" />
+    <meta name="author" content="Naimul islam" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Obfuscated Writeup - CyberDefenders",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-08-01",
+        "description": "During your shift as a SOC analyst, the enterprise EDR alerted a suspicious behavior from an end-user machine. The user indicated that he received a recent email with a DOC file from an unknown sender and passed the document for you to analyze.",
+        "wordCount":  424 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-08-01",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Awesome Hugo blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="https://hba.sid.one/posts/obfuscated-writeup-cyberdefenders/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://hba.sid.one/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <b style="font-size: 20px;">
+            <a href="https://hba.sid.one/" class="title">
+                Malxplorer
+                
+            </a>
+        </b>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Obfuscated Writeup - CyberDefenders</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-08-01T00:00:00&#43;00:00" itemprop="datePublished"> 1 Aug 2023 </time>
+                </div>
+                
+            </header>
+            <details class="toc">
+                <summary><b>Table of Contents</b></summary>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-what-is-the-sha256-hash-of-the-doc-file">1. What is the sha256 hash of the doc file?</a></li>
+    <li><a href="#2-multiple-streams-contain-macros-in-this-document-provide-the-number-of-lowest-one">2. Multiple streams contain macros in this document. Provide the number of lowest one.</a></li>
+    <li><a href="#3-what-is-the-decryption-key-of-the-obfuscated-code">3. What is the decryption key of the obfuscated code?</a></li>
+    <li><a href="#4-what-is-the-name-of-the-dropped-file">4. What is the name of the dropped file?</a></li>
+    <li><a href="#5-this-script-uses-what-language">5. This script uses what language?</a></li>
+    <li><a href="#6-what-is-the-name-of-the-variable-that-is-assigned-the-command-line-arguments">6. What is the name of the variable that is assigned the command-line arguments?</a></li>
+    <li><a href="#7-how-many-command-line-arguments-does-this-script-expect">7. How many command-line arguments does this script expect?</a></li>
+    <li><a href="#8-what-instruction-is-executed-if-this-script-encounters-an-error">8. What instruction is executed if this script encounters an error?</a></li>
+    <li><a href="#9-what-function-returns-the-next-stage-of-code-ie-the-first-round-of-obfuscated-code">9. What function returns the next stage of code (i.e. the first round of obfuscated code)?</a></li>
+    <li><a href="#10-the-function-lxv5-is-an-important-function-what-variable-is-assigned-a-key-string-value-in-determining-what-this-function-does">10. The function LXv5 is an important function, what variable is assigned a key string value in determining what this function does?</a></li>
+    <li><a href="#11-what-encoding-scheme-is-this-function-responsible-for-decoding">11. What encoding scheme is this function responsible for decoding?</a></li>
+    <li><a href="#12-in-the-function-cppt-the-first-two-for-loops-are-responsible-for-what-important-part-of-this-function">12. In the function CpPT, the first two for loops are responsible for what important part of this function?</a></li>
+    <li><a href="#13-the-function-cppt-requires-two-arguments-where-does-the-value-of-the-first-argument-come-from">13. The function CpPT requires two arguments, where does the value of the first argument come from?</a></li>
+    <li><a href="#14-for-the-function-cppt-what-does-the-first-argument-represent">14. For the function CpPT, what does the first argument represent?</a></li>
+    <li><a href="#15-what-encryption-algorithm-does-the-function-cppt-implement-in-this-script">15. What encryption algorithm does the function CpPT implement in this script?</a></li>
+    <li><a href="#16-what-function-is-responsible-for-executing-the-deobfuscated-code">16. What function is responsible for executing the deobfuscated code?</a></li>
+    <li><a href="#17-what-windows-script-host-program-can-be-used-to-execute-this-script-in-command-line-mode">17. What Windows Script Host program can be used to execute this script in command-line mode?</a></li>
+    <li><a href="#18-what-is-the-name-of-the-first-function-defined-in-the-deobfuscated-code">18. What is the name of the first function defined in the deobfuscated code?</a></li>
+  </ul>
+</nav>
+            </details><div class="page-content">
+                <p><img src="https://cyberdefenders.org/media/terraform/Obfuscated/obfuscated.jpg" alt=""></p>
+<blockquote>
+<p>During your shift as a SOC analyst, the enterprise EDR alerted a suspicious behavior from an end-user machine. The user indicated that he received a recent email with a DOC file from an unknown sender and passed the document for you to analyze.</p>
+</blockquote>
+<h2 id="1-what-is-the-sha256-hash-of-the-doc-file">1. What is the sha256 hash of the doc file?</h2>
+<pre tabindex="0"><code>ff2c8cadaa0fd8da6138cce6fce37e001f53a5d9ceccd67945b15ae273f4d751
+</code></pre><h2 id="2-multiple-streams-contain-macros-in-this-document-provide-the-number-of-lowest-one">2. Multiple streams contain macros in this document. Provide the number of lowest one.</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@cee331db43d2 /shared# oledump.py sample  
+</span></span><span class="line"><span class="cl"> 1:       <span class="m">114</span> <span class="s1">&#39;\x01CompObj&#39;</span>
+</span></span><span class="line"><span class="cl"> 2:       <span class="m">284</span> <span class="s1">&#39;\x05DocumentSummaryInformation&#39;</span>
+</span></span><span class="line"><span class="cl"> 3:       <span class="m">392</span> <span class="s1">&#39;\x05SummaryInformation&#39;</span>
+</span></span><span class="line"><span class="cl"> 4:      <span class="m">8017</span> <span class="s1">&#39;1Table&#39;</span>
+</span></span><span class="line"><span class="cl"> 5:      <span class="m">4096</span> <span class="s1">&#39;Data&#39;</span>
+</span></span><span class="line"><span class="cl"> 6:       <span class="m">483</span> <span class="s1">&#39;Macros/PROJECT&#39;</span>
+</span></span><span class="line"><span class="cl"> 7:        <span class="m">65</span> <span class="s1">&#39;Macros/PROJECTwm&#39;</span>
+</span></span><span class="line"><span class="cl"> 8: M    <span class="m">7117</span> <span class="s1">&#39;Macros/VBA/Module1&#39;</span>
+</span></span><span class="line"><span class="cl"> 9: m    <span class="m">1104</span> <span class="s1">&#39;Macros/VBA/ThisDocument&#39;</span>
+</span></span><span class="line"><span class="cl">10:      <span class="m">3467</span> <span class="s1">&#39;Macros/VBA/_VBA_PROJECT&#39;</span>
+</span></span><span class="line"><span class="cl">11:      <span class="m">2964</span> <span class="s1">&#39;Macros/VBA/__SRP_0&#39;</span>
+</span></span><span class="line"><span class="cl">12:       <span class="m">195</span> <span class="s1">&#39;Macros/VBA/__SRP_1&#39;</span>
+</span></span><span class="line"><span class="cl">13:      <span class="m">2717</span> <span class="s1">&#39;Macros/VBA/__SRP_2&#39;</span>
+</span></span><span class="line"><span class="cl">14:       <span class="m">290</span> <span class="s1">&#39;Macros/VBA/__SRP_3&#39;</span>
+</span></span><span class="line"><span class="cl">15:       <span class="m">565</span> <span class="s1">&#39;Macros/VBA/dir&#39;</span>
+</span></span><span class="line"><span class="cl">16:        <span class="m">76</span> <span class="s1">&#39;ObjectPool/_1541577328/\x01CompObj&#39;</span>
+</span></span><span class="line"><span class="cl">17: O   <span class="m">20301</span> <span class="s1">&#39;ObjectPool/_1541577328/\x01Ole10Native&#39;</span>
+</span></span><span class="line"><span class="cl">18:      <span class="m">5000</span> <span class="s1">&#39;ObjectPool/_1541577328/\x03EPRINT&#39;</span>
+</span></span><span class="line"><span class="cl">19:         <span class="m">6</span> <span class="s1">&#39;ObjectPool/_1541577328/\x03ObjInfo&#39;</span>
+</span></span><span class="line"><span class="cl">20:    <span class="m">133755</span> <span class="s1">&#39;WordDocument&#39;</span>
+</span></span></code></pre></div><h2 id="3-what-is-the-decryption-key-of-the-obfuscated-code">3. What is the decryption key of the obfuscated code?</h2>
+<p>The doc file is a dropper. It drops <code>maintools.js</code> file. After executing the file we have to get it. I run it on anyrun and downloaded maintools.js binary. In anyrun process execution, we see maintools.js is executed with <code>EzZETcSXyKAdF_e5I2i1</code> argument. Which is the decryption key of this code.</p>
+<h2 id="4-what-is-the-name-of-the-dropped-file">4. What is the name of the dropped file?</h2>
+<p>maintools.js</p>
+<h2 id="5-this-script-uses-what-language">5. This script uses what language?</h2>
+<p>jscript</p>
+<h2 id="6-what-is-the-name-of-the-variable-that-is-assigned-the-command-line-arguments">6. What is the name of the variable that is assigned the command-line arguments?</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">wvy1</span> <span class="o">=</span> <span class="nx">WScript</span><span class="p">.</span><span class="nx">Arguments</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">ssWZ</span> <span class="o">=</span> <span class="nx">wvy1</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">ES3c</span> <span class="o">=</span> <span class="nx">y3zb</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">trucated</span><span class="p">]</span>
+</span></span></code></pre></div><h2 id="7-how-many-command-line-arguments-does-this-script-expect">7. How many command-line arguments does this script expect?</h2>
+<p>1</p>
+<h2 id="8-what-instruction-is-executed-if-this-script-encounters-an-error">8. What instruction is executed if this script encounters an error?</h2>
+<p>WScript.Quit()</p>
+<h2 id="9-what-function-returns-the-next-stage-of-code-ie-the-first-round-of-obfuscated-code">9. What function returns the next stage of code (i.e. the first round of obfuscated code)?</h2>
+<p>y3zb</p>
+<h2 id="10-the-function-lxv5-is-an-important-function-what-variable-is-assigned-a-key-string-value-in-determining-what-this-function-does">10. The function LXv5 is an important function, what variable is assigned a key string value in determining what this function does?</h2>
+<p>LUK7</p>
+<h2 id="11-what-encoding-scheme-is-this-function-responsible-for-decoding">11. What encoding scheme is this function responsible for decoding?</h2>
+<p>Base64</p>
+<h2 id="12-in-the-function-cppt-the-first-two-for-loops-are-responsible-for-what-important-part-of-this-function">12. In the function CpPT, the first two for loops are responsible for what important part of this function?</h2>
+<p>key-scheduling algorithm</p>
+<h2 id="13-the-function-cppt-requires-two-arguments-where-does-the-value-of-the-first-argument-come-from">13. The function CpPT requires two arguments, where does the value of the first argument come from?</h2>
+<p>command-line argument</p>
+<h2 id="14-for-the-function-cppt-what-does-the-first-argument-represent">14. For the function CpPT, what does the first argument represent?</h2>
+<p>key</p>
+<h2 id="15-what-encryption-algorithm-does-the-function-cppt-implement-in-this-script">15. What encryption algorithm does the function CpPT implement in this script?</h2>
+<p>RC4</p>
+<h2 id="16-what-function-is-responsible-for-executing-the-deobfuscated-code">16. What function is responsible for executing the deobfuscated code?</h2>
+<p>eval</p>
+<h2 id="17-what-windows-script-host-program-can-be-used-to-execute-this-script-in-command-line-mode">17. What Windows Script Host program can be used to execute this script in command-line mode?</h2>
+<p>cscript.exe, an alternative to wscript.exe</p>
+<h2 id="18-what-is-the-name-of-the-first-function-defined-in-the-deobfuscated-code">18. What is the name of the first function defined in the deobfuscated code?</h2>
+<p>UspD</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <small class="footer_copyright">
+        © 2023 Naimul Islam.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="https://hba.sid.one/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

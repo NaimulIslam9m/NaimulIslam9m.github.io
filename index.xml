@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Awesome Hugo blog</title>
+    <link>https://hba.sid.one/</link>
+    <description>Recent content on Awesome Hugo blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://hba.sid.one/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Roadmap for Cybersecurity</title>
+      <link>https://hba.sid.one/posts/roadmap-for-cybersecurity/</link>
+      <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/roadmap-for-cybersecurity/</guid>
+      
+      <description>So, you want to get into cybersecurity? First you have to develop &amp;ldquo;Hacker Mindset&amp;rdquo;. A hacker mindset is a highly curious mind like a child. Constantly wondering how things work. What will happen if I do this or that. Trying to break things to understand the inner workings.
+Fundamental You are not a student of computer science and have little to no knowledge about computers then you should do Harvard University&amp;rsquo;s CS50: Introduction to Computer Science course.</description>
+      
+    </item>
+    
+    <item>
+      <title>Malware Analysis and Reverse Engineering YouTube Channels</title>
+      <link>https://hba.sid.one/posts/malware-analysis-and-reverse-engineering-youtube-channels/</link>
+      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/malware-analysis-and-reverse-engineering-youtube-channels/</guid>
+      
+      <description>
+I regularly follow these YouTube channels for Malware Analysis and Reverse Engineering contents.
+AhmedS Kasmani Amr Thabet - MalTrak ANY.RUN crow cazz CursoReversing Flashback Team Marcus Hutchins MalwareAnalysisForHedgehogs MalwareAficionado MalGamy Make Me Hack Low Level Learning pwn.college OALabs stacksmashing Zer0Mem0ry The PC Security Channel 0x6d696368 0x41414141 0xca7 c3rb3ru5d3d53c Duncan Ogilvie Low Byte Productions Guided Hacking Creel Mitch Edwards LaurieWired Path Cybersec All things IDA dist67 Anuj Soni cybercdh Boston Cybernetics TactiKoolSec </description>
+      
+    </item>
+    
+    <item>
+      <title>GetPDF Writeup - CyberDefenders</title>
+      <link>https://hba.sid.one/posts/getpdf-writeup-cyberdefenders/</link>
+      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/getpdf-writeup-cyberdefenders/</guid>
+      
+      <description>PDF format is the de-facto standard in exchanging documents online. Such popularity, however, has also attracted cyber criminals in spreading malware to unsuspecting users. The ability to generate malicious pdf files to distribute malware is a functionality that has been built into many exploit kits. As users are less cautious about opening PDF files, the malicious PDF file has become quite a successful attack vector. The network traffic is captured in lala.</description>
+      
+    </item>
+    
+    <item>
+      <title>HawkEye Writeup - CyberDefenders</title>
+      <link>https://hba.sid.one/posts/hawkeye-writeup-cyberdefenders/</link>
+      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/hawkeye-writeup-cyberdefenders/</guid>
+      
+      <description>An accountant at your organization received an email regarding an invoice with a download link. Suspicious network traffic was observed shortly after opening the email. As a SOC analyst, investigate the network trace and analyze exfiltration attempts.
+1. How many packets does the capture have? tshark -r stealer.pcap | wc -l 4003 2. At what time was the first packet captured? Go to statistics &amp;gt; capture file properties. First packet capture time 2019-04-10 02:37:07 UTC.</description>
+      
+    </item>
+    
+    <item>
+      <title>Emprisa Maldoc Writeup - Cyberdefenders</title>
+      <link>https://hba.sid.one/posts/emprisa-maldoc-writeup-cyberdefenders/</link>
+      <pubDate>Fri, 04 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/emprisa-maldoc-writeup-cyberdefenders/</guid>
+      
+      <description>As a SOC analyst, you were asked to inspect a suspected document a user received in his inbox. One of your colleagues told you that he could not find anything suspicious. However, throwing the document into the sandboxing solution triggered some alerts.
+Your job is to investigate the document further and confirm whether it&amp;rsquo;s malicious or not.
+1. What is the CVE ID of the exploited vulnerability? First extracted md5 hash and then search it in virustotal.</description>
+      
+    </item>
+    
+    <item>
+      <title>XLM Macros Writeup - CyberDefenders</title>
+      <link>https://hba.sid.one/posts/xlm-macros-cyberdefenders/</link>
+      <pubDate>Fri, 04 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/xlm-macros-cyberdefenders/</guid>
+      
+      <description>Recently, we have seen a resurgence of Excel-based malicous office documents. Howerver, instead of using VBA-style macros, they are using older style Excel 4 macros. This changes our approach to analyzing these documents, requiring a slightly different set of tools. In this challenge, you&amp;rsquo;ll get hands-on with two documents that use Excel 4.0 macros to perform anti-analysis and download the next stage of the attack.
+Sample 1 1. What is the document decryption password?</description>
+      
+    </item>
+    
+    <item>
+      <title>MalDoc101 Writeup - CyberDefenders</title>
+      <link>https://hba.sid.one/posts/maldoc101-writeup-cyberdefenders/</link>
+      <pubDate>Wed, 02 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/maldoc101-writeup-cyberdefenders/</guid>
+      
+      <description>It is common for threat actors to utilize living off the land (LOTL) techniques, such as the execution of PowerShell to further their attacks and transition from macro code. This challenge is intended to show how you can often times perform quick analysis to extract important IOCs. The focus of this exercise is on static techniques for analysis.
+1. Multiple streams contain macros in this document. Provide the number of highest one.</description>
+      
+    </item>
+    
+    <item>
+      <title>Obfuscated Writeup - CyberDefenders</title>
+      <link>https://hba.sid.one/posts/obfuscated-writeup-cyberdefenders/</link>
+      <pubDate>Tue, 01 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/obfuscated-writeup-cyberdefenders/</guid>
+      
+      <description>During your shift as a SOC analyst, the enterprise EDR alerted a suspicious behavior from an end-user machine. The user indicated that he received a recent email with a DOC file from an unknown sender and passed the document for you to analyze.
+1. What is the sha256 hash of the doc file? ff2c8cadaa0fd8da6138cce6fce37e001f53a5d9ceccd67945b15ae273f4d751 2. Multiple streams contain macros in this document. Provide the number of lowest one. root@cee331db43d2 /shared# oledump.</description>
+      
+    </item>
+    
+    <item>
+      <title>RE101 Writeup - CyberDefenders</title>
+      <link>https://hba.sid.one/posts/re101-writeup-cyberdefenders/</link>
+      <pubDate>Sun, 30 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/re101-writeup-cyberdefenders/</guid>
+      
+      <description>RE101 challenge is a binary analysis exercise - a task security blue team analysts do to understand how a specific malware works and extract possible intel.
+I&amp;rsquo;ve used this new encryption I heard about online for my warez; I bet you can&amp;rsquo;t extract the flag! (File: MALWARE000) die &amp;gt; strings ZmxhZzwwb3BzX2lfdXNlZF8xMzM3X2I2NF9lbmNyeXB0aW9uPgo= base64 -d
+Flag: 0ops_i_used_1337_b64_encryption
+Check out what I can do! (File: Just some JS) Obfuscated javascript. node just_some_js</description>
+      
+    </item>
+    
+    <item>
+      <title>MITRE ATT&amp;CK Framework Resources</title>
+      <link>https://hba.sid.one/posts/mitre-attack-framework-resources/</link>
+      <pubDate>Fri, 05 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/mitre-attack-framework-resources/</guid>
+      
+      <description>MITRE ATT&amp;amp;CK is a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations.
+MITRE Attack Navigator is a web-based tool for annotating and exploring ATT&amp;amp;CK matrices. It can be used to visualize defensive coverage, red/blue team planning, the frequency of detected techniques, and more.
+The MITRE Cyber Analytics Repository (CAR) is a collection of analytics for detecting adversary behaviors based on the MITRE ATT&amp;amp;CK model. CAR provides pseudocode and code implementations for various tools (e.</description>
+      
+    </item>
+    
+    <item>
+      <title>Stop Malware Using Macros: Windows Sandbox</title>
+      <link>https://hba.sid.one/posts/stop-malware-using-macros-windows-sandbox/</link>
+      <pubDate>Mon, 23 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/stop-malware-using-macros-windows-sandbox/</guid>
+      
+      <description>Malware continues to be a major threat to individuals and organizations alike. One common way that malware is delivered is through the use of malicious macros in office products, which are often spread through social engineering tactics. While sandboxing office products could potentially mitigate this issue, it&amp;rsquo;s not a simple solution. This is because sandboxing would not be backwards compatible, meaning it would break the existing workflow for many users and companies.</description>
+      
+    </item>
+    
+    <item>
+      <title>Host Your Website on GitHub with Hugo: A Step-by-Step Guide</title>
+      <link>https://hba.sid.one/posts/host-your-website-on-github-with-hugo-a-step-by-step-guide/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/host-your-website-on-github-with-hugo-a-step-by-step-guide/</guid>
+      
+      <description>Today I&amp;rsquo;ve gone through lot&amp;rsquo;s of pain to build my website (again) using Hugo for the 3rd time. 🙂 So I&amp;rsquo;m now documenting my process so that I can redo these in the future smoothly.
+Prerequisite I&amp;rsquo;m assuming you already know how to work with github for my own convenience. If you don&amp;rsquo;t, there are lots of great blogs and youtube videos just one google search away!
+I&amp;rsquo;m also assuming you are using Linux like me.</description>
+      
+    </item>
+    
+    <item>
+      <title>Exploring the Wide Range of Projects Provided by abuse.ch</title>
+      <link>https://hba.sid.one/posts/exploring-the-wide-range-of-projects-provided-by-abuse-ch/</link>
+      <pubDate>Sat, 31 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/posts/exploring-the-wide-range-of-projects-provided-by-abuse-ch/</guid>
+      
+      <description>abuse.ch is providing community driven threat intelligence on cyber threats with a strong focus on malware and botnets. It is a collection of following projects:
+MalwareBazaar MalwareBazaar is a place where your can get malware samples which is shared by malware researchers for infosec community.
+What it offers?
+Latest &amp;amp; Old malware samples. Feodo Tracker Feodo Tracker is place where you can get latest malicious botnet C2 servers IP associated with Emotet, Dridex, TrickBot, QakBot and BazarLoader.</description>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hba.sid.one/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hba.sid.one/about/</guid>
+      
+      <description>About Me Welcome to my corner of the internet! I&amp;rsquo;m Naim, and I&amp;rsquo;m thrilled to have you here.
+I&amp;rsquo;m a Malware Analyst who is trying to learn about everything. This website is my digital playground, where I share my experiences, insights, and creations with the world.
+Who Am I? I believe in the power of consistency, and I strive to learn new things. Whether I&amp;rsquo;m Building, Breaking, or Helping others, I approach each endeavor with enthusiasm and a commitment to excellence.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

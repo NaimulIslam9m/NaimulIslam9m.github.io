@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Host Your Website on GitHub with Hugo: A Step-by-Step Guide | Awesome Hugo blog</title>
+<meta property="og:title" content="Host Your Website on GitHub with Hugo: A Step-by-Step Guide | Awesome Hugo blog" />
+<meta name="twitter:title" content="Host Your Website on GitHub with Hugo: A Step-by-Step Guide | Awesome Hugo blog" />
+<meta itemprop="name" content="Host Your Website on GitHub with Hugo: A Step-by-Step Guide | Awesome Hugo blog" />
+<meta name="application-name" content="Host Your Website on GitHub with Hugo: A Step-by-Step Guide | Awesome Hugo blog" />
+<meta property="og:site_name" content="Awesome hugo blog" />
+
+<meta name="description" content="Hosting Hugo Website on Github">
+<meta itemprop="description" content="Hosting Hugo Website on Github" />
+<meta property="og:description" content="Hosting Hugo Website on Github" />
+<meta name="twitter:description" content="Hosting Hugo Website on Github" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="https://hba.sid.one/" />
+  <meta property="og:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image" content="https://hba.sid.one/" />
+  <meta name="twitter:image:src" content="https://hba.sid.one/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-01-01T00:00:00Z />
+    <meta property="article:published_time" content=2023-01-01T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Naimul islam" />
+    <meta property="article:author" content="Naimul islam" />
+    <meta name="author" content="Naimul islam" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Host Your Website on GitHub with Hugo: A Step-by-Step Guide",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-01-01",
+        "description": "Hosting Hugo Website on Github",
+        "wordCount":  316 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-01-01",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Awesome Hugo blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="https://hba.sid.one/posts/host-your-website-on-github-with-hugo-a-step-by-step-guide/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://hba.sid.one/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <b style="font-size: 20px;">
+            <a href="https://hba.sid.one/" class="title">
+                Malxplorer
+                
+            </a>
+        </b>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Host Your Website on GitHub with Hugo: A Step-by-Step Guide</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-01-01T00:00:00&#43;00:00" itemprop="datePublished"> 1 Jan 2023 </time>
+                </div>
+                
+            </header>
+            <details class="toc">
+                <summary><b>Table of Contents</b></summary>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisite">Prerequisite</a></li>
+    <li><a href="#steps">Steps</a></li>
+  </ul>
+</nav>
+            </details><div class="page-content">
+                <p>Today I&rsquo;ve gone through lot&rsquo;s of pain to build my website (again) using <a href="https://gohugo.io/">Hugo</a> for the 3rd time. 🙂 So I&rsquo;m now documenting my process so that I can redo these in the future smoothly.</p>
+<h2 id="prerequisite">Prerequisite</h2>
+<p>I&rsquo;m assuming you already know how to work with <a href="https://github.com/">github</a> for my own convenience. If you don&rsquo;t, there are lots of great blogs and youtube videos just one google search away!<br>
+I&rsquo;m also assuming you are using Linux like me. 🙂</p>
+<p>For reference you can checkout <a href="https://gohugo.io/getting-started/quick-start/">quick start</a> page.</p>
+<h2 id="steps">Steps</h2>
+<ol>
+<li>Install Hugo server &amp; Git:</li>
+</ol>
+<pre tabindex="0"><code>sudo apt install hugo
+sudo apt install git
+</code></pre><ol start="2">
+<li>Create a directory structure for your project with <em>&ldquo;what ever&rdquo;</em> name you want using the following command:</li>
+</ol>
+<pre tabindex="0"><code>hugo new site [any_name]
+</code></pre><ol start="3">
+<li>Import the theme you want to use in your website:</li>
+</ol>
+<pre tabindex="0"><code>cd [any_name]
+git init
+git submodule add git@github.com:luizdepra/hugo-coder.git themes/hugo-coder
+</code></pre><ol start="4">
+<li>Edit <code>config.toml</code> file as instructed in your theme.</li>
+</ol>
+<blockquote>
+<p><strong>Bug</strong>: Dong change &ldquo;&mdash;&rdquo; to &ldquo;&mdash;&rdquo; in markdown&rsquo;s yaml. It took me hours to figure out. 😑</p>
+</blockquote>
+<ol start="6">
+<li>Put your contents like following way:</li>
+</ol>
+<pre tabindex="0"><code>content/
+├─ posts
+│　├─ post 1.md
+│　└─ post 2.md
+├─ about.md
+└─ contact.md
+</code></pre><blockquote>
+<p><strong>Note:</strong> It is not necessary to follow the above format. You can name what ever you want. You just need to tweak certain settings accordingly if you don&rsquo;t follow default way.</p>
+</blockquote>
+<ol start="6">
+<li>Go to <code>[any_name]</code> directory what you had created. Then run <code>hugo server</code> command to run hugo server on your device. This is how you can check everything is looking fine on you website or not.</li>
+<li><strong>Give your all attention here!</strong>. Run <code>hugo</code> command to create <strong>public</strong> directory. The directory contains all the code of your website. You will just deploy the files inside the public directory into github page. Noting else.</li>
+<li>Go to public directory, run git and push it into your github repo named <code>[your_username].github.io</code>.</li>
+<li>Now take a coffee break. Checkout your website after sometime. You are all set!</li>
+</ol>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <small class="footer_copyright">
+        © 2023 Naimul Islam.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="https://hba.sid.one/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
